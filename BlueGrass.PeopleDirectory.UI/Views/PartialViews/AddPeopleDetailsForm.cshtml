@@ -1,0 +1,76 @@
+﻿<div class="row">
+    <div class="input-field col s6">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="u-id" type="text" class="validate" style="display: none">
+        <input id="name" type="text" class="validate">
+        <label for="name">Name</label>
+    </div>
+    <div class="input-field col s6">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="sur-name" type="text" class="validate">
+        <label for="sur-name">Sur Name</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s6" id="mobile-row">
+        <i class="material-icons prefix">phone</i>
+        <input id="mobile-number" type="text" class="validate">
+        <label for="mobile-number">Mobile Number*</label>
+    </div>
+    <div class="input-field col s6" id="email-row">
+        <i class="material-icons prefix">email</i>
+        <input id="email" type="text" class="validate">
+        <label for="email">Email Address*</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s6">
+        <select id="select-country" onChange="bindCityDropDown()">
+           
+        </select>
+        <label>Country*</label>
+    </div>
+
+    <div class="input-field col s6">
+        <select id="select-city">
+        </select>
+        <label>City*</label>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="file-field input-field col s6">
+
+        <div class="btn">
+            <span>Browse</span>
+            <input type="file" id="file-upload"  onchange="encodeImagetoBase64(this)" />
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" id="profile-picture" type="text" placeholder="Upload Profile Picture*" />
+        </div>
+    </div>
+
+    <div class="input-field col s6">
+        <div class="row">
+            <label>
+                <input name="gender" id="male" type="radio" value="2" />
+                <span>Male</span>
+            </label>
+            <label>
+                <input name="gender" id="female" type="radio" value="1" />
+                <span>Female</span>
+            </label>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="input-field col s12">
+        <a class="waves-effect waves-light btn" id="save-people-details">Save <i class="material-icons right">send</i></a>
+        <a class="waves-effect waves-light btn" id="update-people-details" onclick="updatePersonDetails()">Update <i class="material-icons right">send</i></a>
+    </div>
+</div>
+

@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+}
+    <div class="row" style="margin-top:5px">
+        <div class="col s8">
+            <span class="welcome-message">Welcome: <span class="admin-label">  @ViewBag.Name</span> </span>
+        </div>
+        <div class="col s2">
+            <a class="btn waves-effect waves-light red lighten-2 modal-trigger" id="add-new-person-modal" data-target="addnewpersonmodal" href="#addnewpersonmodal">Add New Person</a>
+        </div>
+        <div class="col s2">
+            @using (Html.BeginForm("Logout", "Admin"))
+            {
+                <input type="submit" value="Logout" class="btn waves-effect waves-light red lighten-2" />
+            }
+        </div>
+
+    </div>
+
+<div class="row">
+    <table id="tbl-people-details" class="table responsive-table highlight centered">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>City</th>
+                <th>Country</th>
+                <th class="no-sort"></th>
+            </tr>
+        </thead>
+        <tbody id="people-details-body">
+        </tbody>
+    </table>
+</div>
+
+<div id="addnewpersonmodal" class="modal modal-fit-content">
+    <div class="modal-content">
+        <partial name="~/Views/PartialViews/AddPeopleDetailsForm.cshtml" />
+    </div>
+</div>
+
+        @section Scripts {
+
+            <script src="~/js/admin.js" type="text/javascript"></script>
+        }
