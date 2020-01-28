@@ -3,19 +3,48 @@
 }
 
 <div class="row">
+    <div class="col s4">
+        <div class="row">
+            <div class="input-field col s11">
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label for="autocomplete-input">search</label>
+            </div>
+            <div class="input-field col s1" id="clear-icon">
+                <i class="material-icons">clear</i>
+            </div>
+        </div>
+    </div>
+    <div class="col s4">
+        <div class="row">
+            <div class="input-field col s12">
+                <select id="select-country" onChange="bindCityDropDown()">
+                </select>
+                <label>Country*</label>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col s4">
+        <div class="row">
+            <div class="input-field col s12">
+                <select id="select-city" onChange="doCitySearch()">
+                </select>
+                <label>City*</label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row">
     <table id="tbl-people-details" class="table responsive-table highlight">
         <thead>
             <tr>
-                <th>#</th>
+                <th></th>
                 <th>Name</th>
-                <th>Sur Name</th>
-                <th>Profile Picture</th>
-                <th>Mobile Number</th>
-                <th>Email Address</th>
-                <th>Gender</th>
-                <th>City</th>
-                <th>CountryName</th>
-                <th class="no-sort"></th>
+                <th>Surname</th>
             </tr>
         </thead>
         <tbody id="people-details-body">
@@ -24,11 +53,20 @@
 </div>
 
 
+<div id="viewpersonmodal" class="modal modal-fit-content">
+    <div class="modal-content">
+        <partial name="~/Views/PartialViews/ViewPersonDetails.cshtml" />
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
 
 
 @section Scripts {
 
-    <script src="~/js/site.js" type="text/javascript"></script>
+    <script src="~/js/client.js" type="text/javascript"></script>
 }
 
 

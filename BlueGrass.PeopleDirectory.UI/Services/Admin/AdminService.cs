@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using BlueGrass.PeopleDirectory.Dapper.Repository.Models;
 using BlueGrass.PeopleDirectory.UI.Utilities;
 using System.Collections.Generic;
+using System.Net.Mail;
 
 namespace BlueGrass.PeopleDirectory.UI.Services.Admin
 {
@@ -120,6 +121,31 @@ namespace BlueGrass.PeopleDirectory.UI.Services.Admin
             {
                 throw ex;
             }
+        }
+
+        public bool SendEmail(EmailModel modal)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                mail.IsBodyHtml = true;
+                mail.From = new MailAddress(modal.FromAddress);
+                mail.To.Add(modal.ToAddress);
+                mail.Subject = modal.Subject;
+                mail.Body = modal.Body;
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("testingmr007@gmail.com", "Testingmr@7");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+
         }
     }
 }

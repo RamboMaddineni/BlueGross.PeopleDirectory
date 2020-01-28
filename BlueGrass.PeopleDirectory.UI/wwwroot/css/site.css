@@ -64,10 +64,27 @@ body {
     height: 50px;
 }
 
-.admin-label, .welcome-message{
+#profile-pic-view {
+    width: 90px;
+    height: 90px;
+}
+
+.admin-label, .welcome-message {
     text-transform: uppercase;
 }
 
 .modal-fit-content {
-    max-height: 80% !important;
+    max-height: 85% !important;
+}
+
+.col-icon{
+    width:30px;
+}
+
+.modal-trigger i{
+    font-size: 35px;
+}
+
+.data-actions a i {
+    font-size: 35px;
 }

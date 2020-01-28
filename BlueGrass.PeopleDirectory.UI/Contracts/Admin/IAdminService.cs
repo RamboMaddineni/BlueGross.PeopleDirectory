@@ -15,6 +15,7 @@ namespace BlueGrass.PeopleDirectory.UI.Contracts.Admin
         Task<IList<GetPersonsModel>> GetPeopleDetails();
         Task<IList<GetCountryModel>> GetCountries();
         Task<IList<GetCityModel>> GetCities(GetCitiesByCountryIdModel model);
+        bool SendEmail(EmailModel modal);
 
     }
 }

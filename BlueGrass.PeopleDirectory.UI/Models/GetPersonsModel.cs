@@ -16,5 +16,7 @@ namespace BlueGrass.PeopleDirectory.UI.Models
         public string Gender { get; set; }
         public string CityName { get; set; }
         public string CountryName { get; set; }
+        public int  CityId{ get; set; }
+        public int CountryId { get; set; }
     }
 }

@@ -65,7 +65,15 @@ namespace BlueGrass.PeopleDirectory.UI.Controllers.API
         {
             var result = await _adminService.GetCities(model);
             return ResponseUtility.CreateResponse(result);
-        }     
+        }
+
+
+        [HttpPost("[action]")]
+        public ActionResult<ResponseModel> SendEmail([FromBody]EmailModel model)
+        {
+            var result = _adminService.SendEmail(model);
+            return ResponseUtility.CreateResponse(result);
+        }
 
     }
 }

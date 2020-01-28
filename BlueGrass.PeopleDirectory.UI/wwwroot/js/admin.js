@@ -1,4 +1,6 @@
 ﻿var base64String;
+var originalData;
+
 $(document).ready(function () {
     $('select').formSelect();
     bindCountryDropDown();
@@ -46,7 +48,7 @@ function addPersonDetails() {
         requiredFields.push("mobile number is Required");
     }
 
-    if (emailAddress === "") {
+    if (validateEmail(emailAddress) === false) {
         requiredFields.push("Email is Required");
     }
 
@@ -86,7 +88,7 @@ function addPersonDetails() {
             success: function (data) {
                 console.log(data);
                 getPeopleDetails();
-        
+                $('.modal').modal('close');
             }
         });
     }
@@ -95,6 +97,11 @@ function addPersonDetails() {
             M.toast({ html: requiredFields[i] });
         }
     }   
+}
+
+function validateEmail(mail) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(mail);
 }
 
 function bindCountryDropDown() {
@@ -206,7 +213,6 @@ function buildPeopleDetailsHTML(elements) {
 }
 
 
-
 function triggerUpdatePeopleDetails(name, surName, mobileNumber, emailAddress, gender, city, country, id) {
     $("#update-people-details").show();
     $("#save-people-details").hide();
@@ -217,6 +223,18 @@ function triggerUpdatePeopleDetails(name, surName, mobileNumber, emailAddress, g
     $("#u-id").val(id);
     $('input[name="gender"]:checked').val(gender);
     M.updateTextFields();
+
+    originalData = {
+        "name": name,
+        "surName": surName,
+        "mobileNumber": mobileNumber,
+        "emailAddress": emailAddress,
+        "gender": gender,
+        "city": city,
+        "country": country,
+        "profilePicture": "",
+        "Id":id
+    };
 }
 
 
@@ -285,10 +303,9 @@ function updatePersonDetails() {
             url: url,
             data: JSON.stringify(body),
             success: function (data) {
-                console.log(data);
                 getPeopleDetails();
-                window.Location.reload(true);
-
+                sendEmail(body);
+                $('.modal').modal('close');
             }
         });
     }
@@ -315,6 +332,44 @@ function triggerDeletePeopleDetails(id) {
         success: function (data) {
             M.toast({ html: 'People Details deleted' });
             getPeopleDetails();
+        },
+        error: function (jqXHR) {
+            M.toast({ html: 'Somthing went wrong' });
+        }
+    });
+}
+
+
+function sendEmail(updatedData) {
+
+    var subject = "";
+    subject += "<table cellspacing='0' cellpadding='7' width='600' border='0'>\
+                <tr><td># </td><td>Previous Values</td><td class='person-name'>Updated Values</td></tr>\
+                <tr><td>Name: </td><td>" + originalData.name + "</td><td class='person-name'>" + updatedData.name + "</td></tr>\
+                <tr><td>Surname: </td><td>" + originalData.surName + "</td><td class='person-name'>" + updatedData.surName + "</td></tr>\
+                <tr><td>Email Address: </td><td>" + originalData.emailAddress + "</td><td class='person-name'>" + updatedData.emailAddress + "</td></tr>\
+                <tr><td>Mobile: </td><td>" + originalData.mobileNumber + "</td><td class='person-name'>" + updatedData.mobileNumber + "</td></tr>\
+                <tr><td>Gender (1: Female, 2: Male): </td><td>" + originalData.gender + "</td><td class='person-name'>" + updatedData.gender + "</td></tr>\
+                <tr><td>Country: </td><td>" + originalData.country + "</td><td class='person-name'>" + updatedData.country + "</td></tr>\
+                <tr><td>City: </td><td>" + originalData.city + "</td><td class='person-name'>" + updatedData.city + "</td></tr>\
+                </table>";
+
+    var body = {
+        "Body": subject,
+        "FromAddress": "testingmr007@gmail.com",
+        "ToAddress": "mark@bluegrassdigital.com",
+        //"ToAddress": "testingmr007@gmail.com",
+        "Subject": "People directory profile updated at Id: " + updatedData.Id
+    };
+
+    var url = "/api/Admin/SendEmail";
+    $.ajax({
+        contentType: 'application/json',
+        type: "POST",
+        url: url,
+        data: JSON.stringify(body),
+        success: function (data) {
+  
         },
         error: function (jqXHR) {
             M.toast({ html: 'Somthing went wrong' });
