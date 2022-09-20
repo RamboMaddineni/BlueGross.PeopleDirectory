@@ -28,6 +28,8 @@ namespace BlueGrass.PeopleDirectory.Dapper.Repository.Services
             }
         }
 
+
+
         public Task<IList<T>> QueryList<T>(DbConnection connection) where T : new()
         {
             try
